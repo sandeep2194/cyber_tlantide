@@ -6,8 +6,8 @@
   "license": "unlicensed",
   "private": true,
   "dependencies": {
-    "express": "^4.17.3",
-    "node-create-csv": "^1.0.0"
+    "csv-blink": "^1.0.1",
+    "express": "^4.17.3"
   },
   "scripts": {
     "start": "node ./index.js"
