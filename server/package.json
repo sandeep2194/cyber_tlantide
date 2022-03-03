@@ -1,0 +1,14 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "sandeep2194",
+  "license": "unlicensed",
+  "private":true,
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "scripts": {
+    "start" : "node ./index.js"
+  }
+}
