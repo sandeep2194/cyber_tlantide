@@ -2,7 +2,8 @@ const billService = require('../services')
 
 exports.bill = async (req, res) => {
     try {
-        const { data } = req.query
+        const { data } = req.body
+        console.log(data)
         if (!data)
             return res.status(400).send('Phone number required')
         const save = billService.saveBill({ ...data });

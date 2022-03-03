@@ -2,24 +2,31 @@ const fs = require('fs');
 const path = require('path');
 const helpers = require('../utils/helpers');
 const CSV = require('csv-blink');
+const storage = require('node-persist');
 
-exports.saveBill = (data) => {
+
+exports.saveBill = async (data) => {
+    await storage.init();
     const today = helpers.todayDate();
     const dir = path.join("../data/", today.toString());
+    let get = await storage.getItem('inv');
+    console.log('get', get);
     if (!fs.existsSync(dir)) {
-        fs.mkdir(path.join("../data/", today.toString()), (err) => helpers.logError(err));
+        fs.mkdir(path.join(dir), (err) => helpers.logError(err));
     }
-    createCSV(data, dir)
+    createCSV(data, dir, get, today)
+    get++
+    await storage.setItem('inv', get);
 }
 
-const createCSV = (data, dir) => {
+const createCSV = (data, dir, billNo, date) => {
     const csv = new CSV(
         ["No Facture", "Nom Entreprise", "Nom", "Courriel", "Adresse", "Telephone", "# Cheque", "Livraison", "Sous Total", "TPS", "TVQ", "Grand Total", "produit", "options", "quantite", "prix"],
     )
     const row = Object.values(data);
     csv.addRow(row)
-    const file = fs.writeFile(path.join(dir, data.noFacture + '.csv'), csv.file, (err) => helpers.logError(err))
-    console.log('done', csv.file);
+    const fileName = billNo + '-' + date + "-" + "EB.csv"
+    fs.writeFile(path.join(dir, fileName), csv.file, (err) => helpers.logError(err))
 }
 // this.saveBill({
 //     noFacture: "test1223",
