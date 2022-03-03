@@ -2,9 +2,11 @@ const express = require('express')
 const app = express();
 const port = 3000;
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-});
+var indexRouter = require('./routes');
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use('/', indexRouter);
+
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}!`)
