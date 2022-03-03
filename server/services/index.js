@@ -1,15 +1,17 @@
 const fs = require('fs');
 const path = require('path');
+const storage = require('node-persist');
 const helpers = require('../utils/helpers');
 const CSV = require('csv-blink');
-const storage = require('node-persist');
-
 
 exports.saveBill = async (data) => {
-    await storage.init();
+    await helpers.startStore()
     const today = helpers.todayDate();
-    const dir = path.join("../data/", today.toString());
+    const dir = path.join(__dirname, "../../data/", today.toString());
     let get = await storage.getItem('inv');
+    if (!get) {
+        await storage.setItem('inv', 1);
+    }
     console.log('get', get);
     if (!fs.existsSync(dir)) {
         fs.mkdir(path.join(dir), (err) => helpers.logError(err));
