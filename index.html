@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Cyber Atlantide services informatique</title>
+    <script src="./script.js"></script>
+</head>
+<body>
+    <header>
+        <img src="./img/logo.png" alt="logo"/>
+    </header>
+    <div>
+    <div class="underheader1">
+        <h3>Interface de paiement en ligne</h3>
+    </div>
+    <div class="underheader2">
+        <button onclick="location.reload()">Nouveau Client</button>
+        <button onclick="location.reload()">Nouveau Panier</button>
+    </div>
+    </div>
+    <form>
+        <h4 class="title">Client</h4>
+        <div class="row">
+            <p># de facture JJMMAA-Initial </p>
+            <input type="text" value="" name="facture" class="field_text" maxlength="100">
+        </div>
+        <div class="row">
+            <p>Nom de l'entreprise</p>
+            <input type="text" value="" name="entreprise" class="field_text" maxlength="100">
+        </div>
+        <div class="row">
+            <p>Prenom, Nom</p>
+            <input type="text" value="" name="prenom_nom" class="field_text" maxlength="100">
+        </div>
+        <div class="row">
+            <p>Courriel</p>
+            <input type="text" value="" name="courriel" class="field_text" maxlength="100">
+        </div>
+        <div class="row">
+            <p>Addresse Postale</p>
+            <input type="text" value="" name="addresse_postale" class="field_text" maxlength="100">
+        </div>
+        <div class="row">
+            <p>Telephone</p>
+            <input type="text" value="" name="telephone" class="field_text" maxlength="100">
+        </div>
+        <div class="row">
+            <p>Paiement par chèque #</p>
+            <input type="text" value="" name="paiement_par_cheque" class="field_text" maxlength="100">
+        </div>
+        <div class="row">
+            <p>Livraison demandée</p>
+            <input type="checkbox" value="" name="livraison_demandee" class="field_text" maxlength="100">
+        </div>
+    </form>
+      <div id="all">
+        <h3>Panier</h3>
+        <div class="billItemsHeader">
+            <p>Service</p>
+            <p>Description</p>
+            <p>Quantity</p>
+            <p>Prix</p>
+        </div>
+    <hr>
+      </div>
+      <div id="items"></div>
+      <div class="calcu">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <div class="row">
+                    <div class="col">Sous Total: &emsp;</div>
+                    <div class="col" id="total">0 <span>$</span></div>
+                </div>
+            </div>
+      </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <div class="row">
+                    <div class="col">TPS 5% &emsp;</div>
+                    <div class="col" id="tps">0 <span>$</span></div>
+                </div>
+            </div>
+      </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <div class="row">
+                    <div class="col">TVQ 8.50% &emsp;</div>
+                    <div class="col" id="tvq">0 <span>$</span></div>
+                </div>
+            </div>
+      </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <div class="row">
+                    <div class="col">GRAND TOTAL &emsp;</div>
+                    <div class="col" id="gTotal">0 <span>$</span></div>
+                </div>
+            </div>
+      </div>
+    <div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
+            <button onclick="bill.addRow()">Recalculer / Ajouter un article</button>
+            <button onclick="window.print()">Print</button>
+        </div>
+    </div>
+    <hr>
+    <footer>
+        <h5>Copyright © 2010 Cyber@tlantide "Cyber Atlantide services informatique".</h5>
+    </footer>
+</body>
+</html>

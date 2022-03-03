@@ -1,0 +1,73 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    max-width: 700px;
+    margin: auto;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 20px 0px 20px 0px;
+}
+.title{
+    margin-top: 20px;
+}
+.underheader1{
+    display: block;
+    background-color: gray;
+    padding: 10px 20px 10px 10px;
+    margin-bottom: 10px;
+}
+.underheader2{
+    background-color: lightgray;
+    padding: 10px 20px 10px 10px;
+    margin-bottom: 10px;
+}
+button{
+    padding: 5px;
+}
+.row input[type=text]{
+  padding: 6px 10px;
+  box-sizing: border-box;
+}
+.billItemsHeader{
+    display: flex;
+    color: cornflowerblue;
+    font-size: medium;
+}
+.billItemsHeader p{
+    flex: 1;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+#items{
+    margin-top: 50px;
+}
+#items h3{
+    margin-bottom: 15px;
+}
+#items .row{
+    flex-direction: row;
+}
+#items .row .col{
+    flex: 1;
+}
+#items .row .col input{
+    max-width: 150px;
+    margin-right: 20px;
+    box-sizing: border-box;
+}
+.calcu{
+    margin-top: 20px;
+}
+.calcu .row{
+    margin: 10px;
+}
+footer{
+    margin: 20px;
+    text-align: center;
+}
