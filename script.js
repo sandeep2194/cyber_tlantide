@@ -12,8 +12,6 @@ var bill = {
             input.className = v.toString();
             if (i == 2 || i == 3) {
                 input.value = 0;
-            } else {
-                input.value = 
             }
             col.appendChild(input);
         })
