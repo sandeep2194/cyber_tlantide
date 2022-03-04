@@ -1,0 +1,7 @@
+FROM node:bullseye
+WORKDIR /code
+COPY ./server /code/
+RUN yarn install
+CMD [ "yarn start" ]
+
+    
