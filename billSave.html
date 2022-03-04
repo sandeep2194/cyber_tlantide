@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <title>Cyber Atlantide services informatique</title>
-    <script src="./script.js"></script>
 </head>
 <body>
     <header>
@@ -16,8 +15,6 @@
     <h2>Invoice No:  <span id="inv"></span></h2>
     <br/>
     <br/>
-    <div class="content">
-       <div class="client">
            <h3>Client informatique</h3>
            <div class="row">
                <div class="col"># de facture JJMMAA-Initial: </div>
@@ -47,14 +44,12 @@
                <div class="col">Paiement par chèque #: </div>
                <div class="col" id="paiement"></div>
            </div>
-           <div class="row">
+           <!-- <div class="row">
                <div class="col">Livraison demandée: </div>
                <div class="col" id="livraison_demandee"></div>
-           </div>
-       </div>
+           </div> -->
     <br/>
     <br/>
-       <div class="bill">
            <h3>Bill</h3>
            <div class="row">
                <div class="col">Service: </div>
@@ -88,7 +83,6 @@
                <div class="col"> Grand Total: </div>
                <div class="col" id="gTotal"></div>
            </div>
-       </div>
     <div class="row">
         <div class="col"></div>
         <div class="col">
@@ -96,9 +90,22 @@
             <button onclick="window.close()">Exit</button>
         </div>
     </div>
-    </div>
     <footer>
         <h5>Copyright © 2010 Cyber@tlantide "Cyber Atlantide services informatique".</h5>
     </footer>
 </body>
+    <script>
+        const store = JSON.parse(localStorage.getItem('store')); 
+        store.ids.forEach((v) => {
+            console.log(v);
+            const el = document.getElementById(v.toString());
+            console.log(document.getElementById(v))
+            if (el && el.tagName == 'INPUT') {
+                if (el.type)
+                    el.value = store.data[v];
+            } else if (el && el.tagName == "DIV") {
+                el.innerHTML = store.data[v]
+            }
+        })
+    </script>
 </html>
