@@ -62,6 +62,30 @@ var bill = {
         });
         bill.store.data = data;
         localStorage.setItem("store", JSON.stringify(bill.store));
+        bill.sendData();
     },
+    sendData: () => {
+        fetch("http://localhost:3000/bill/", {
+
+            // Adding method type
+            method: "POST",
+
+            // Adding body or contents to send
+            body: JSON.stringify({
+                data: { ...bill.store.data }
+            }),
+
+            // Adding headers to the request
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+
+            // Converting to JSON
+            .then(response => response.json())
+
+            // Displaying results to console
+            .then(json => console.log(json));
+    }
 }
 window.addEventListener("load", bill.addRow);

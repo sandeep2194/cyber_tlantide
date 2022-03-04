@@ -6,6 +6,7 @@
   "license": "unlicensed",
   "private": true,
   "dependencies": {
+    "cors": "^2.8.5",
     "csv-blink": "^1.0.1",
     "express": "^4.17.3",
     "node-persist": "^3.1.0"
