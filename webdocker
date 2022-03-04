@@ -1,6 +1,5 @@
 FROM node:bullseye
 COPY . /code/
-VOLUME [ "/cyber_tlantide" ]
 WORKDIR /code
 RUN yarn global add http-server
 CMD [ "http-server", "-p 8080" ]

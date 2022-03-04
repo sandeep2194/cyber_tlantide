@@ -3,4 +3,3 @@ COPY . /code/
 WORKDIR /code/server
 RUN yarn install
 CMD [ "node", "index.js" ]
-VOLUME [ "/cyber_tlantide" ]
