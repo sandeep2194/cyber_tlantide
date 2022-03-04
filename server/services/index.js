@@ -23,7 +23,7 @@ exports.saveBill = async (data) => {
 
 const createCSV = (data, dir, billNo, date) => {
     const csv = new CSV(
-        ["No Facture", "Nom Entreprise", "Nom", "Courriel", "Adresse", "Telephone", "# Cheque", "Livraison", "Sous Total", "TPS", "TVQ", "Grand Total", "produit", "options", "quantite", "prix"],
+        Object.keys(data),
     )
     const row = Object.values(data);
     csv.addRow(row)
