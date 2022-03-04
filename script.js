@@ -64,7 +64,7 @@ var bill = {
                 data[v.toString()] = el.innerHTML ? el.innerHTML : 'null'
             }
         });
-        bill.store.data.inv = bill.store.invNum;
+        data.inv = bill.store.invNum;
         bill.store.data = data;
         localStorage.setItem("store", JSON.stringify(bill.store));
         bill.sendData();
