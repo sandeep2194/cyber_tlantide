@@ -6,6 +6,7 @@ const billController = require('../controllers')
 router.get('/', function (req, res) {
     res.status(400).send("unauthorized")
 });
+router.get('/inv', billController.getInvNum);
 router.post('/bill', billController.bill);
 
 module.exports = router;

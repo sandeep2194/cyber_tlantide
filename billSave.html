@@ -95,7 +95,8 @@
     </footer>
 </body>
     <script>
-        const store = JSON.parse(localStorage.getItem('store')); 
+        const store = JSON.parse(localStorage.getItem('store'));
+        document.getElementById('inv').innerHTML = store.invNum;
         store.ids.forEach((v) => {
             console.log(v);
             const el = document.getElementById(v.toString());

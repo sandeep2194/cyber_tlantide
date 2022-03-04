@@ -4,6 +4,12 @@ const storage = require('node-persist');
 const helpers = require('../utils/helpers');
 const CSV = require('csv-blink');
 
+exports.getInvNum = async () => {
+    await helpers.startStore()
+    return await storage.getItem('inv');
+}
+
+
 exports.saveBill = async (data) => {
     await helpers.startStore()
     const today = helpers.todayDate();

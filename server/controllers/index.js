@@ -12,4 +12,11 @@ exports.bill = async (req, res) => {
         res.status(500).send({ 'status': error })
     }
 }
-
+exports.getInvNum = async (req, res) => {
+    try {
+        const inv = await billService.getInvNum();
+        return res.status(200).send({ "inv": inv.toString() })
+    } catch {
+        res.status(500).send({ 'status': error })
+    }
+}

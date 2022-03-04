@@ -2,8 +2,12 @@ var bill = {
     store: {
         ids: ["facture", "entreprise", "nom", "courriel", "addresse_postale", "telephone", "paiement", "service", "description", "qty", "prix", "total", "tps", "tvq", "gTotal", "livraison_demandee"],
         data: {},
+        invNum: 0,
     },
-    addRow: () => {
+    addRow: async () => {
+        await bill.getInvNum();
+        // console.log(bill.store.invNum);
+        document.getElementById('inv').innerHTML = bill.store.invNum;
         let items = document.getElementById('items')
         let row = document.createElement('div');
         row.className = "row";
@@ -60,6 +64,7 @@ var bill = {
                 data[v.toString()] = el.innerHTML ? el.innerHTML : 'null'
             }
         });
+        bill.store.data.inv = bill.store.invNum;
         bill.store.data = data;
         localStorage.setItem("store", JSON.stringify(bill.store));
         bill.sendData();
@@ -86,6 +91,19 @@ var bill = {
 
             // Displaying results to console
             .then(json => console.log(json));
+    },
+    getInvNum: async () => {
+        let rep = await fetch("http://localhost:3000/inv/", {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        // console.log(rep)
+        let json = await rep.json()
+        // console.log(json);
+        bill.store.invNum = json.inv
+        // .then(response => response.json()).then(json => bill.store.invNum = json.inv)
     }
 }
 window.addEventListener("load", bill.addRow);
