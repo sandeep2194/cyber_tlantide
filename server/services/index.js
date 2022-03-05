@@ -29,7 +29,7 @@ exports.saveBill = async (data) => {
 
 exports.deleteData = async () => {
     const dir = path.join(__dirname, "../../data")
-    await fsPromises.rm(dir, {
+    await fsPromises.rmdir(dir, {
         recursive: true
     })
     fs.mkdir(path.join(__dirname, "../../data/"), (err) => helpers.logError(err))
