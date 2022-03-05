@@ -70,7 +70,7 @@ var bill = {
         bill.sendData();
     },
     sendData: () => {
-        fetch("http://localhost:3000/bill/", {
+        fetch("http://164.92.66.219:3000/bill", {
 
             // Adding method type
             method: "POST",
@@ -93,7 +93,7 @@ var bill = {
             .then(json => console.log(json));
     },
     getInvNum: async () => {
-        let rep = await fetch("http://localhost:3000/inv/", {
+        let rep = await fetch("http://164.92.66.219:3000/inv", {
             method: "GET",
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
