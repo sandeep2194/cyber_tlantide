@@ -29,6 +29,7 @@ exports.saveBill = async (data) => {
 
 exports.deleteData = async () => {
     try {
+        await helpers.startStore()
         const dir = path.join(__dirname, "../../data")
         if (fs.existsSync(dir))
             await fsPromises.rmdir(dir, {
