@@ -31,7 +31,7 @@ exports.deleteData = async () => {
     try {
         const dir = path.join(__dirname, "../../data")
         if (fs.existsSync(dir))
-            await fs.rm(dir, {
+            await fsPromises.rmdir(dir, {
                 recursive: true
             }, (err) => helpers.logError(err))
         if (!fs.existsSync(dir))
