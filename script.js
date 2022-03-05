@@ -1,43 +1,48 @@
 var bill = {
     store: {
-        ids: ["facture", "entreprise", "nom", "courriel", "addresse_postale", "telephone", "paiement", "service", "description", "qty", "prix", "total", "tps", "tvq", "gTotal", "livraison_demandee"],
+        ids: ["facture", "entreprise", "nom", "courriel", "addresse_postale", "telephone", "paiement", "total", "tps", "tvq", "gTotal", "livraison_demandee"],
         data: {},
         invNum: 0,
+        numberOfRows: 3,
+        services: ['test1', "test2", "test3"],
+        description: ['test1', "test2", "test3"],
     },
     addRow: async () => {
         await bill.getInvNum();
         // console.log(bill.store.invNum);
-        document.getElementById('inv').innerHTML = bill.store.invNum;
-        let items = document.getElementById('items')
-        let row = document.createElement('div');
-        row.className = "row";
-        let col = document.createElement('div');
-        col.className = "col";
-        const classesForInputs = ["service", "description", "qty", "prix"]
-        classesForInputs.forEach((v, i) => {
-            let input = document.createElement('input');
-            input.type = "text";
-            input.className = v.toString();
-            input.id = v.toString();
-            if (i == 0) {
-                // change for service
-                input.value = 'test'
-            }
-            if (i == 1) {
-                // change this for discription
-                input.value = 'test2'
-            }
-            if (i == 2 || i == 3) {
-                input.value = 0;
-            }
-            if (v == "qty" || v == "prix") {
-                input.addEventListener('change', bill.total);
-            }
-            col.appendChild(input);
-        })
-        row.appendChild(col);
-        if (items)
-            items.appendChild(row);
+        for (let i = 0; i < bill.store.numberOfRows; i++) {
+            const currentService = bill.store.services[i];
+            const currentDescription = bill.store.description[i];
+            document.getElementById('inv').innerHTML = bill.store.invNum;
+            let items = document.getElementById('items')
+            let row = document.createElement('div');
+            row.className = "row";
+            let col = document.createElement('div');
+            col.className = "col";
+            const classesForInputs = ["service", "description", "qty", "prix"]
+            classesForInputs.forEach((v, i2) => {
+                let input = document.createElement('input');
+                input.type = "text";
+                input.className = v.toString();
+                input.id = v.toString();
+                if (i2 == 0) {
+                    input.value = currentService
+                }
+                if (i2 == 1) {
+                    input.value = currentDescription
+                }
+                if (i2 == 2 || i2 == 3) {
+                    input.value = 0;
+                }
+                if (v == "qty" || v == "prix") {
+                    input.addEventListener('change', bill.total);
+                }
+                col.appendChild(input);
+            })
+            row.appendChild(col);
+            if (items)
+                items.appendChild(row);
+        }
     },
     total: () => {
         let allPrice = document.querySelectorAll("#items .prix");
@@ -62,6 +67,10 @@ var bill = {
     save: () => {
         bill.total();
         data = {};
+        let allPrice = document.querySelectorAll("#items .prix");
+        let allQty = document.querySelectorAll('#items .qty');
+        let allService = document.querySelectorAll('#items .service');
+        let allDes = document.querySelectorAll('#items .description');
         bill.store.ids.forEach((v, i) => {
             const el = document.getElementById(v);
             // el ? console.log(el.tagName) : console.log(null)
@@ -72,6 +81,22 @@ var bill = {
                 data[v.toString()] = el.innerHTML ? el.innerHTML : 'null'
             }
         });
+
+        if (allService.length > 0) {
+            for (let index = 0; index < allService.length; index++) {
+                const price = allPrice[index].value;
+                const qty = allQty[index].value;
+                const ser = allService[index].value;
+                const des = allDes[index].value;
+
+                data["prix" + index] = price;
+                data["quantity" + index] = qty;
+                data["service" + index] = ser;
+                data["description" + index] = des;
+
+                amt += parseFloat(price * qty);
+            }
+        }
         data.inv = bill.store.invNum;
         bill.store.data = data;
         localStorage.setItem("store", JSON.stringify(bill.store));

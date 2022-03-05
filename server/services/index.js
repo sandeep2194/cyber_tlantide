@@ -50,9 +50,13 @@ const createCSV = (data, dir, billNo, date) => {
     )
     const row = Object.values(data);
     csv.addRow(row)
-    const name = data.nom.split(" ");
+    const name = data["nom"].split(" ");
+    console.log('nom', nom);
+
     const nomFirstLetter = [...name[0]][0];
-    const prenomFirstLetter = [...name[1]][0];
+    console.log('first', nomFirstLetter);
+
+    //const prenomFirstLetter = [...name[1]][0];
     const fileName = billNo + '-' + date + "-" + nomFirstLetter + prenomFirstLetter + ".csv"
     fs.writeFile(path.join(dir, fileName), csv.file, (err) => helpers.logError(err))
 }
