@@ -36,6 +36,7 @@ exports.deleteData = async () => {
             }, (err) => helpers.logError(err))
         if (!fs.existsSync(dir))
             fs.mkdir(path.join(__dirname, "../../data/"), (err) => helpers.logError(err))
+        await storage.setItem('inv', 1)
     } catch (error) {
         console.log(error)
     }
@@ -48,7 +49,10 @@ const createCSV = (data, dir, billNo, date) => {
     )
     const row = Object.values(data);
     csv.addRow(row)
-    const fileName = billNo + '-' + date + "-" + "EB.csv"
+    const name = data.nom.split(" ");
+    const nomFirstLetter = [...name[0]][0];
+    const prenomFirstLetter = [...name[1]][0];
+    const fileName = billNo + '-' + date + "-" + nomFirstLetter + prenomFirstLetter + ".csv"
     fs.writeFile(path.join(dir, fileName), csv.file, (err) => helpers.logError(err))
 }
 
