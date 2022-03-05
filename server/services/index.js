@@ -41,7 +41,6 @@ exports.deleteData = async () => {
     }
 }
 
-this.deleteData();
 
 const createCSV = (data, dir, billNo, date) => {
     const csv = new CSV(
