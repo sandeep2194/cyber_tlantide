@@ -1,4 +1,5 @@
 const fs = require('fs');
+const fsPromises = require('fs').promises
 const path = require('path');
 const storage = require('node-persist');
 const helpers = require('../utils/helpers');
@@ -8,7 +9,6 @@ exports.getInvNum = async () => {
     await helpers.startStore()
     return await storage.getItem('inv');
 }
-
 
 exports.saveBill = async (data) => {
     await helpers.startStore()
@@ -27,6 +27,16 @@ exports.saveBill = async (data) => {
     await storage.setItem('inv', get);
 }
 
+exports.deleteData = async () => {
+    const dir = path.join(__dirname, "../../data")
+    await fsPromises.rm(dir, {
+        recursive: true
+    })
+    fs.mkdir(path.join(__dirname, "../../data/"), (err) => helpers.logError(err))
+}
+
+this.deleteData();
+
 const createCSV = (data, dir, billNo, date) => {
     const csv = new CSV(
         Object.keys(data),
@@ -36,6 +46,7 @@ const createCSV = (data, dir, billNo, date) => {
     const fileName = billNo + '-' + date + "-" + "EB.csv"
     fs.writeFile(path.join(dir, fileName), csv.file, (err) => helpers.logError(err))
 }
+
 // this.saveBill({
 //     noFacture: "test1223",
 //     nf2: "test",

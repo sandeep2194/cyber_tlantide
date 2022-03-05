@@ -20,3 +20,12 @@ exports.getInvNum = async (req, res) => {
         res.status(500).send({ 'status': error })
     }
 }
+
+exports.deleteData = async (req, res) => {
+    try {
+        billService.deleteData();
+        res.status(200).send({ 'status': "success", "message": "all data delted" },)
+    } catch (error) {
+        res.status(500).send({ 'status': error })
+    }
+}

@@ -19,6 +19,14 @@ var bill = {
             input.type = "text";
             input.className = v.toString();
             input.id = v.toString();
+            if (i == 0) {
+                // change for service
+                input.value = 'test'
+            }
+            if (i == 1) {
+                // change this for discription
+                input.value = 'test2'
+            }
             if (i == 2 || i == 3) {
                 input.value = 0;
             }
@@ -70,7 +78,7 @@ var bill = {
         bill.sendData();
     },
     sendData: () => {
-        fetch("http://164.92.66.219:3000/bill", {
+        fetch("https://164.92.66.219:3000/bill", {
 
             // Adding method type
             method: "POST",
@@ -93,7 +101,7 @@ var bill = {
             .then(json => console.log(json));
     },
     getInvNum: async () => {
-        let rep = await fetch("http://164.92.66.219:3000/inv", {
+        let rep = await fetch("https://164.92.66.219:3000/inv", {
             method: "GET",
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
