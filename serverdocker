@@ -1,5 +1,5 @@
 FROM node:bullseye
-COPY . /code/
-WORKDIR /code/server
+COPY ./server /code
+WORKDIR /code
 RUN yarn install
 CMD [ "node", "index.js" ]
