@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,106 +8,118 @@
     <link rel="stylesheet" href="./style.css">
     <title>Cyber Atlantide services informatique</title>
 </head>
+
 <body>
     <header>
-        <img src="./img/logo.png" alt="logo"/>
+        <img src="./img/logo.png" alt="logo" />
     </header>
-    <br/>
-    <h2>Invoice No:  <span id="inv"></span></h2>
-    <br/>
-    <br/>
-           <h3>Client informatique</h3>
-           <div class="row">
-               <div class="col"># de facture JJMMAA-Initial: </div>
-               <div class="col" id="facture"></div>
-           </div>
-           <div class="row">
-               <div class="col">Nom de l'entreprise: </div>
-               <div class="col" id="entreprise"></div>
-           </div>
-           <div class="row">
-               <div class="col">Prenom, Nom: </div>
-               <div class="col" id="nom"></div>
-           </div>
-           <div class="row">
-               <div class="col">Courriel: </div>
-               <div class="col" id="courriel"></div>
-           </div>
-           <div class="row">
-               <div class="col">Addresse Postale: </div>
-               <div class="col" id="addresse_postale"></div>
-           </div>
-           <div class="row">
-               <div class="col">Telephone: </div>
-               <div class="col" id="telephone"></div>
-           </div>
-           <div class="row">
-               <div class="col">Paiement par chèque #: </div>
-               <div class="col" id="paiement"></div>
-           </div>
-           <!-- <div class="row">
+    <br />
+    <h2>Invoice No: <span id="inv"></span></h2>
+    <br />
+    <br />
+    <h3>Client informatique</h3>
+    <div class="row">
+        <div class="col"># de facture JJMMAA-Initial: </div>
+        <div class="col" id="facture"></div>
+    </div>
+    <div class="row">
+        <div class="col">Nom de l'entreprise: </div>
+        <div class="col" id="entreprise"></div>
+    </div>
+    <div class="row">
+        <div class="col">Prenom, Nom: </div>
+        <div class="col" id="nom"></div>
+    </div>
+    <div class="row">
+        <div class="col">Courriel: </div>
+        <div class="col" id="courriel"></div>
+    </div>
+    <div class="row">
+        <div class="col">Addresse Postale: </div>
+        <div class="col" id="addresse_postale"></div>
+    </div>
+    <div class="row">
+        <div class="col">Telephone: </div>
+        <div class="col" id="telephone"></div>
+    </div>
+    <div class="row">
+        <div class="col">Paiement par chèque #: </div>
+        <div class="col" id="paiement"></div>
+    </div>
+    <!-- <div class="row">
                <div class="col">Livraison demandée: </div>
                <div class="col" id="livraison_demandee"></div>
            </div> -->
-    <br/>
-    <br/>
-           <h3>Bill</h3>
-           <div class="row">
-               <div class="col">Service: </div>
-               <div class="col" id="service"></div>
-           </div>
-           <div class="row">
-               <div class="col">Description: </div>
-               <div class="col" id="description"></div>
-           </div>
-           <div class="row">
-               <div class="col">Quantity: </div>
-               <div class="col" id="qty"></div>
-           </div>
-           <div class="row">
-               <div class="col"> Prix: </div>
-               <div class="col" id="prix"></div>
-           </div>
-           <div class="row">
-               <div class="col"> Sous Total: </div>
-               <div class="col" id="total"></div>
-           </div>
-           <div class="row">
-               <div class="col"> TPS(5%): </div>
-               <div class="col" id="tps"></div>
-           </div>
-           <div class="row">
-               <div class="col"> TVQ(8.50%): </div>
-               <div class="col" id="tvq"></div>
-           </div>
-           <div class="row">
-               <div class="col"> Grand Total: </div>
-               <div class="col" id="gTotal"></div>
-           </div>
+    <br />
+    <br />
+    <h3>Bill</h3>
+    <div id="items">
+        <div class="row">
+            <div class="col">Prix</div>
+            <div class="col">Description</div>
+            <div class="col">Quantity</div>
+            <div class="col">Prix</div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col"> Sous Total: </div>
+        <div class="col" id="total"></div>
+    </div>
+    <div class="row">
+        <div class="col"> TPS(5%): </div>
+        <div class="col" id="tps"></div>
+    </div>
+    <div class="row">
+        <div class="col"> TVQ(8.50%): </div>
+        <div class="col" id="tvq"></div>
+    </div>
+    <div class="row">
+        <div class="col"> Grand Total: </div>
+        <div class="col" id="gTotal"></div>
+    </div>
+    <br>
     <div class="row">
         <div class="col"></div>
         <div class="col">
             <button onclick="window.print()">Print</button>
-            <button onclick="window.close()">Exit</button>
+            <button onclick="window.close()">back</button>
         </div>
     </div>
     <footer>
-        <h5>Copyright © 2010 Cyber@tlantide "Cyber Atlantide services informatique".</h5>
+        <h5>Copyright © 2010 Cyber@tlantide "Cyber Atlantide services
+            informatique".</h5>
     </footer>
 </body>
-    <script>
-        const store = JSON.parse(localStorage.getItem('store'));
-        document.getElementById('inv').innerHTML = store.invNum;
-        store.ids.forEach((v) => {
-            console.log(v);
-            const el = document.getElementById(v.toString());
-            console.log(document.getElementById(v))
-            if (el && el.tagName == 'INPUT') {
-                if (el.type)
-                    el.value = store.data[v];
-            } else if (el && el.tagName == "DIV") {
-                el.innerHTML = store.data[v]
-            }
-        })
-    </script>
+<script>
+    const store = JSON.parse(localStorage.getItem('store'));
+    document.getElementById('inv').innerHTML = store.invNum;
+    store.ids.forEach((v) => {
+        console.log(v);
+        const el = document.getElementById(v.toString());
+        console.log(document.getElementById(v))
+        if (el && el.tagName == 'INPUT') {
+            if (el.type)
+                el.value = store.data[v];
+        } else if (el && el.tagName == "DIV") {
+            el.innerHTML = store.data[v]
+        }
+    })
+    const services = Object.values(store["data"]["services"]);
+    const items = document.getElementById('items')
+    for (let i = 0; i < services.length; i + 4) {
+        const row = document.createElement('div');
+        row.className = 'row';
+        const slice = services.splice(i, i + 4)
+        console.log(slice);
+        for (let index = 0; index < 4; index++) {
+            const col = document.createElement('div');
+            col.className = 'col';
+            col.innerHTML = slice[index];
+            row.appendChild(col);
+        }
+        items.appendChild(row);
+    }
+</script>
+
 </html>

@@ -1,13 +1,26 @@
+
 var bill = {
     store: {
         ids: ["facture", "entreprise", "nom", "courriel", "addresse_postale", "telephone", "paiement", "total", "tps", "tvq", "gTotal", "livraison_demandee"],
         data: {},
         invNum: 0,
-        numberOfRows: 3,
-        services: ['test1', "test2", "test3"],
-        description: ['test1', "test2", "test3"],
+        //change number of rows of bill items
+        numberOfRows: 4,
+        // change services from those rows
+        services: ['test1', "test2", "test3", "test4"],
+        // change description from those rows
+        description: ['test1', "test2", "test3", "test4"],
+        localserverUrl: "http://127.0.0.1:3000",
+        prodserverUrl: "https://164.92.66.219:3000",
+        url: "0",
+        env: 'prod'
     },
     addRow: async () => {
+        if (bill.store.env == 'dev') {
+            bill.store.url = bill.store.localserverUrl;
+        } else {
+            bill.store.url = bill.store.prodserverUrl;
+        }
         await bill.getInvNum();
         // console.log(bill.store.invNum);
         for (let i = 0; i < bill.store.numberOfRows; i++) {
@@ -81,7 +94,7 @@ var bill = {
                 data[v.toString()] = el.innerHTML ? el.innerHTML : 'null'
             }
         });
-
+        let services = {}
         if (allService.length > 0) {
             for (let index = 0; index < allService.length; index++) {
                 const price = allPrice[index].value;
@@ -89,13 +102,12 @@ var bill = {
                 const ser = allService[index].value;
                 const des = allDes[index].value;
 
-                data["prix" + index] = price;
-                data["quantity" + index] = qty;
-                data["service" + index] = ser;
-                data["description" + index] = des;
-
-                amt += parseFloat(price * qty);
+                services["prix" + (index + 1)] = price;
+                services["quantity" + (index + 1)] = qty;
+                services["service" + (index + 1)] = ser;
+                services["description" + (index + 1)] = des;
             }
+            data['services'] = services
         }
         data.inv = bill.store.invNum;
         bill.store.data = data;
@@ -103,7 +115,8 @@ var bill = {
         bill.sendData();
     },
     sendData: () => {
-        fetch("https://164.92.66.219:3000/bill", {
+        const url = bill.store.url + "/bill";
+        fetch(url, {
 
             // Adding method type
             method: "POST",
@@ -126,7 +139,8 @@ var bill = {
             .then(json => console.log(json));
     },
     getInvNum: async () => {
-        let rep = await fetch("https://164.92.66.219:3000/inv", {
+        const url = bill.store.url + "/inv"
+        let rep = await fetch(url, {
             method: "GET",
             headers: {
                 "Content-type": "application/json; charset=UTF-8"

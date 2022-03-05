@@ -45,19 +45,18 @@ exports.deleteData = async () => {
 
 
 const createCSV = (data, dir, billNo, date) => {
+    let services = { ...data.services };
+    delete data.services;
+    data = { ...data, ...services };
     const csv = new CSV(
         Object.keys(data),
     )
     const row = Object.values(data);
     csv.addRow(row)
     const name = data["nom"].split(" ");
-    console.log('nom', nom);
-
     const nomFirstLetter = [...name[0]][0];
-    console.log('first', nomFirstLetter);
-
-    //const prenomFirstLetter = [...name[1]][0];
-    const fileName = billNo + '-' + date + "-" + nomFirstLetter + prenomFirstLetter + ".csv"
+    const prenomFirstLetter = name[1] ? [...name[1]][0] : 'n';
+    const fileName = billNo + '-' + date + "-" + nomFirstLetter.toUpperCase() + prenomFirstLetter.toUpperCase() + ".csv"
     fs.writeFile(path.join(dir, fileName), csv.file, (err) => helpers.logError(err))
 }
 

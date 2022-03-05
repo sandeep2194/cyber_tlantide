@@ -1,0 +1,2 @@
+facture,entreprise,nom,courriel,addresse_postale,telephone,paiement,total,tps,tvq,gTotal,inv,prix1,quantity1,service1,description1,prix2,quantity2,service2,description2,prix3,quantity3,service3,description3,prix4,quantity4,service4,description4
+null,null,null,null,null,null,null,0.00,0.00,0.00,0.00,5,0,0,test1,test1,0,0,test2,test2,0,0,test3,test3,0,0,test4,test4
