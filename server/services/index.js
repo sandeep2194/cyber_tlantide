@@ -33,14 +33,7 @@ exports.deleteData = async () => {
         await helpers.startStore()
         const dir = path.join(__dirname, "../../data")
         if (fs.existsSync(dir))
-            (async () => {
-                try {
-                    await del(dir);
-                    console.log(`${dir} is deleted!`);
-                } catch (err) {
-                    console.error(`Error while deleting ${dir}.`);
-                }
-            })();
+            deleteFolderRecursive(dir);
         if (!fs.existsSync(dir))
             fs.mkdir(path.join(__dirname, "../../data/"), (err) => helpers.logError(err))
         await storage.setItem('inv', 1)
@@ -48,7 +41,21 @@ exports.deleteData = async () => {
         console.log(error)
     }
 }
-
+const deleteFolderRecursive = function (directoryPath) {
+    if (fs.existsSync(directoryPath)) {
+        fs.readdirSync(directoryPath).forEach((file, index) => {
+            const curPath = path.join(directoryPath, file);
+            if (fs.lstatSync(curPath).isDirectory()) {
+                // recurse
+                deleteFolderRecursive(curPath);
+            } else {
+                // delete file
+                fs.unlinkSync(curPath);
+            }
+        });
+        fs.rmdirSync(directoryPath);
+    }
+};
 
 const createCSV = (data, dir, billNo, date) => {
     let services = { ...data.services };
