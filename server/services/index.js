@@ -4,6 +4,7 @@ const path = require('path');
 const storage = require('node-persist');
 const helpers = require('../utils/helpers');
 const CSV = require('csv-blink');
+const del = require('del');
 
 exports.getInvNum = async () => {
     await helpers.startStore()
@@ -32,9 +33,14 @@ exports.deleteData = async () => {
         await helpers.startStore()
         const dir = path.join(__dirname, "../../data")
         if (fs.existsSync(dir))
-            await fsPromises.rmdir(dir, {
-                recursive: true
-            }, (err) => helpers.logError(err))
+            (async () => {
+                try {
+                    await del(dir);
+                    console.log(`${dir} is deleted!`);
+                } catch (err) {
+                    console.error(`Error while deleting ${dir}.`);
+                }
+            })();
         if (!fs.existsSync(dir))
             fs.mkdir(path.join(__dirname, "../../data/"), (err) => helpers.logError(err))
         await storage.setItem('inv', 1)
